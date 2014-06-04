@@ -20,4 +20,8 @@
     <string name="tv_scrollcard_activity_phone_text">Votre numéro :</string>
     <string name="tv_phone_confirm_label">Touchez pour confirmer</string>
 
+
+
+    <string name="phone_number_formatted" formatted="false">%2$s %2$s %2$s %2$s %2$s</string>
+
 </resources>

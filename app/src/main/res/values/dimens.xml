@@ -24,8 +24,8 @@
 
     <!-- DIGITS dimention for scrollcard -->
     <dimen name="glass_card_digit_height">160px</dimen>
-    <dimen name="glass_card_digit_width">160px</dimen>
 
     <!-- margin for phone number display in footer -->
     <dimen name="phone_margin">10px</dimen>
+    <dimen name="phone_confirm">80px</dimen>
 </resources>

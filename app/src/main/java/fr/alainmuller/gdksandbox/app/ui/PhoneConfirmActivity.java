@@ -15,6 +15,7 @@ import com.google.android.glass.touchpad.GestureDetector;
 
 import fr.alainmuller.gdksandbox.app.R;
 import fr.alainmuller.gdksandbox.app.config.Config;
+import fr.alainmuller.gdksandbox.app.tools.StringUtils;
 
 public class PhoneConfirmActivity extends Activity {
 
@@ -36,7 +37,7 @@ public class PhoneConfirmActivity extends Activity {
         String phoneNumber = intent.getStringExtra(Config.EXTRA_PHONE);
 
         TextView tvPhone = (TextView) findViewById(R.id.tv_phone_confirm);
-        tvPhone.setText(tvPhone.getText().toString() + " " + phoneNumber);
+        tvPhone.setText(tvPhone.getText().toString() + " " + StringUtils.getFormattedNumber(phoneNumber));
     }
 
     // //////////////// //

@@ -1,9 +1,11 @@
 package fr.alainmuller.gdksandbox.app.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.glass.app.Card;
@@ -49,8 +51,8 @@ public class DigitsCardScrollAdapter extends CardScrollAdapter {
             // Return the digit in a TextView
             TextView tv = new TextView(context);
             tv.setGravity(Gravity.CENTER);
-            tv.setTextSize(60);
-
+            tv.setTextSize(120);
+            tv.setTypeface(Typeface.DEFAULT_BOLD);
             tv.setText(String.valueOf(position % 10));
             convertView = tv;
         }

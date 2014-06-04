@@ -13,6 +13,7 @@ import com.google.android.glass.widget.CardScrollView;
 import fr.alainmuller.gdksandbox.app.R;
 import fr.alainmuller.gdksandbox.app.adapter.DigitsCardScrollAdapter;
 import fr.alainmuller.gdksandbox.app.config.Config;
+import fr.alainmuller.gdksandbox.app.tools.StringUtils;
 
 /**
  * Play with a ScrollCardView to enter a phone number
@@ -69,15 +70,7 @@ public class PhoneTypingActivity extends Activity {
     }
 
     private void displayPhoneNumber() {
-        String displayedPhone = "";
-        char phone[] = mPhoneNumber.toCharArray();
-
-        for (int i = 0; i < mPhoneNumber.length(); i++) {
-            displayedPhone += phone[i];
-            // Display phone number in "XX XX XX XX XX" format
-            if (i % 2 != 0)
-                displayedPhone += " ";
-        }
+        String displayedPhone = StringUtils.getFormattedNumber(mPhoneNumber);
         mTvPhoneNumber.setText(displayedPhone);
     }
 

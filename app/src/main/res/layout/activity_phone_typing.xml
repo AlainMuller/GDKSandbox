@@ -16,11 +16,10 @@
 
     <view
         android:id="@+id/scrollcard_scrollview"
-        android:layout_width="@dimen/glass_card_digit_width"
-        android:layout_height="@dimen/glass_card_digit_height"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/scrollcard_phone_infos"
+        android:layout_centerInParent="true"
         class="com.google.android.glass.widget.CardScrollView"/>
 
     <LinearLayout
