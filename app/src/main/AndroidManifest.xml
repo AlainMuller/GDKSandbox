@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="fr.alainmuller.gdksandbox.app" >
+
+    <!-- Allow Visibility on Glass application list -->
+    <uses-permission android:name="com.google.android.glass.permission.DEVELOPMENT" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".ui.MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+                <!-- For voice input -->
+                <action android:name="com.google.android.glass.action.VOICE_TRIGGER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="com.google.android.glass.VoiceTrigger"
+                android:resource="@xml/voiceinput_main" />
+        </activity>
+        <activity
+            android:name=".ui.PhoneTypingActivity"
+            android:label="@string/title_activity_scroll_card" >
+        </activity>
+        <activity
+            android:name=".ui.PhoneConfirmActivity"
+            android:label="@string/title_activity_phone_confirm" >
+        </activity>
+    </application>
+
+</manifest>
