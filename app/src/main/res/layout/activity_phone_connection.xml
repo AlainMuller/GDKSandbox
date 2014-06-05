@@ -9,8 +9,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/glass_card_margin"
+        android:text="@string/phone_connection_status"/>
+
+    <TextView
+        android:id="@+id/tv_phone_connection_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="@string/hello_world"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        />
+        android:textAppearance="?android:attr/textAppearanceLarge"/>
 </RelativeLayout>

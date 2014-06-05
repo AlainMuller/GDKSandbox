@@ -22,4 +22,5 @@
     <string name="tv_phone_confirm_label">Touchez pour confirmer</string>
     <string name="action_phone_typing">Saisir numéro</string>
     <string name="action_phone_call">Appeler</string>
+    <string name="phone_connection_status">Status</string>
 </resources>

@@ -92,6 +92,7 @@ public class MainActivity extends Activity {
                         openScrollCardActivity();
                     }
                 });
+                finish();
                 return true;
             case R.id.action_phone_call:
                 mHandler.post(new Runnable() {
@@ -100,6 +101,7 @@ public class MainActivity extends Activity {
                         openPhoneConnectionActivity();
                     }
                 });
+                finish();
                 return true;
 
             // etc...
