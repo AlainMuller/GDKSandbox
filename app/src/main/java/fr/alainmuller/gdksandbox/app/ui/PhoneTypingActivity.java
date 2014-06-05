@@ -1,13 +1,16 @@
 package fr.alainmuller.gdksandbox.app.ui;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
 
+import com.google.android.glass.media.Sounds;
 import com.google.android.glass.widget.CardScrollView;
 
 import fr.alainmuller.gdksandbox.app.R;
@@ -22,6 +25,9 @@ public class PhoneTypingActivity extends Activity {
 
     private static final String LOG_TAG = "PhoneTypingActivity";
 
+    // Audio manager used to play system sound effects
+    private AudioManager mAudioManager;
+
     private String mPhoneNumber = "";
     private TextView mTvPhoneNumber;
 
@@ -33,6 +39,8 @@ public class PhoneTypingActivity extends Activity {
         mTvPhoneNumber = (TextView) findViewById(R.id.scrollcard_phone);
         CardScrollView mCardScrollView = (CardScrollView) findViewById(R.id.scrollcard_scrollview);
 
+        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+
         // init adapter and set it to the scrollview
         DigitsCardScrollAdapter adapter = new DigitsCardScrollAdapter(getApplicationContext());
         mCardScrollView.setAdapter(adapter);
@@ -42,6 +50,8 @@ public class PhoneTypingActivity extends Activity {
         mCardScrollView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mAudioManager.playSoundEffect(Sounds.TAP);
+
                 // Concat the digit to phone number
                 mPhoneNumber += String.valueOf(position % 10);
                 displayPhoneNumber();
@@ -58,6 +68,7 @@ public class PhoneTypingActivity extends Activity {
         mCardScrollView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                mAudioManager.playSoundEffect(Sounds.DISALLOWED);
                 if (mPhoneNumber.length() > 0) {
                     // Revert last digit
                     mPhoneNumber = mPhoneNumber.substring(0, mPhoneNumber.length() - 1);

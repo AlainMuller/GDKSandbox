@@ -3,6 +3,7 @@ package fr.alainmuller.gdksandbox.app.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.widget.TextView;
 
+import com.google.android.glass.media.Sounds;
 import com.google.android.glass.touchpad.Gesture;
 import com.google.android.glass.touchpad.GestureDetector;
 
@@ -24,13 +26,16 @@ public class PhoneConfirmActivity extends Activity {
     // For tap events
     private GestureDetector mGestureDetector;
 
+    // Audio manager used to play system sound effects
+    private AudioManager mAudioManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_confirm);
 
-        // For gesture handling.
         mGestureDetector = createGestureDetector(this);
+        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
         // Get and display phone number
         Intent intent = getIntent();
@@ -39,10 +44,6 @@ public class PhoneConfirmActivity extends Activity {
         TextView tvPhone = (TextView) findViewById(R.id.tv_phone_confirm);
         tvPhone.setText(tvPhone.getText().toString() + " " + StringUtils.getFormattedNumber(phoneNumber));
     }
-
-    // //////////////// //
-    // Gesture handling //
-    // //////////////// //
 
     @Override
     public boolean onGenericMotionEvent(MotionEvent event) {
@@ -59,8 +60,8 @@ public class PhoneConfirmActivity extends Activity {
             @Override
             public boolean onGesture(Gesture gesture) {
                 if (gesture == Gesture.TAP) {
-                    Log.d(LOG_TAG, "Phone confirmed!");
-                    finish();
+                    mAudioManager.playSoundEffect(Sounds.TAP);
+                    openOptionsMenu();
                     return true;
                 }
                 return false;
@@ -82,7 +83,15 @@ public class PhoneConfirmActivity extends Activity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_phone_confirm) {
+            mAudioManager.playSoundEffect(Sounds.SUCCESS);
+            Log.d(LOG_TAG, "Phone confirmed!");
+            finish();
+            return true;
+        } else if (id == R.id.action_phone_type) {
+            mAudioManager.playSoundEffect(Sounds.DISMISSED);
+            Log.d(LOG_TAG, "Phone not confirmed!");
+            finish();
             return true;
         }
         return super.onOptionsItemSelected(item);

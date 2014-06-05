@@ -29,10 +29,6 @@ public class MainActivity extends Activity {
 
     }
 
-    // //////////////// //
-    // Gesture handling //
-    // //////////////// //
-
     @Override
     public boolean onGenericMotionEvent(MotionEvent event) {
         if (mGestureDetector != null) {
