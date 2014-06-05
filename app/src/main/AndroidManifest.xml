@@ -33,6 +33,10 @@
             android:name=".ui.PhoneConfirmActivity"
             android:label="@string/title_activity_phone_confirm" >
         </activity>
+        <activity
+            android:name=".ui.PhoneConnectionActivity"
+            android:label="@string/title_activity_phone_connection" >
+        </activity>
     </application>
 
 </manifest>

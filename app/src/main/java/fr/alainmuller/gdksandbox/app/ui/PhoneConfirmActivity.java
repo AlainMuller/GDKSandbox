@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,6 +29,9 @@ public class PhoneConfirmActivity extends Activity {
 
     // Audio manager used to play system sound effects
     private AudioManager mAudioManager;
+
+    // Start new activities in a handler to keep smooth closing animations
+    private final Handler mHandler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,18 +86,42 @@ public class PhoneConfirmActivity extends Activity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_phone_confirm) {
-            mAudioManager.playSoundEffect(Sounds.SUCCESS);
-            Log.d(LOG_TAG, "Phone confirmed!");
-            finish();
-            return true;
-        } else if (id == R.id.action_phone_type) {
-            mAudioManager.playSoundEffect(Sounds.DISMISSED);
-            Log.d(LOG_TAG, "Phone not confirmed!");
-            finish();
-            return true;
+        switch (item.getItemId()) {
+
+            case R.id.action_phone_confirm:
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mAudioManager.playSoundEffect(Sounds.SUCCESS);
+                        Log.d(LOG_TAG, "Phone confirmed!");
+                        openPhoneConnectionActivity();
+                    }
+                });
+                finish();
+                return true;
+            case R.id.action_phone_type:
+                mHandler.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        mAudioManager.playSoundEffect(Sounds.DISMISSED);
+                        Log.d(LOG_TAG, "Phone not confirmed!");
+                        openScrollCardActivity();
+                    }
+                });
+                finish();
+                return true;
+            default:
+                return false;
         }
-        return super.onOptionsItemSelected(item);
+    }
+
+    private void openScrollCardActivity() {
+        Intent intent = new Intent(this, PhoneTypingActivity.class);
+        startActivity(intent);
+    }
+
+    private void openPhoneConnectionActivity() {
+        Intent intent = new Intent(this, PhoneConnectionActivity.class);
+        startActivity(intent);
     }
 }
